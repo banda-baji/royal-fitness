@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    height: 100vh;
+    background-image: url(assets/gym1..jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-right: 10%;
+  }
+
+  .signup-container {
+    position: fixed;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    border: 2px solid gray;
+    box-shadow: 0 0 20px rgba(47, 221, 241, 0.5);
+    width: 100%;
+    max-width: 400px;
+    backdrop-filter: blur(5px);
+    background-color: transparent;
+    
+  }
+  .signup-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .signup-container input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #ccc;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    
+  }
+  input::placeholder{
+    color: white;
+    opacity: 0.8;
+  }
+  .signup-container button {
+    width: 50%;
+    padding: 12px;
+    background-color: #05c9df;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 30%;
+    margin-top: 10px;
+    
+  }
+  .signup-container button:hover {
+    background-color: #218838;
+  }
+  h2{
+      color: white;
+      cursor: pointer;
+  }
+  h2:hover{
+      color: aqua;
+  }
+  .inp{
+      background-color: transparent;    
+  }
+ 
+  input[type="text"] {
+    color: #d5eef4; /* This sets the text color to red */
+    font-weight: 700;
+    border: 2px solid white;
+  }  
+   
+  input[type="email"] {
+    color: #dff0f0; /* This sets the text color to red */
+    font-weight: 700;
+  }  
+   
+  input[type="tel"] {
+    color: #d7ecf0; /* This sets the text color to red */
+    font-weight: 700;
+  }  
+   
+  input[type="password"] {
+    color: #dcecf1; /* This sets the text color to red */
+    font-weight: 700;
+  }  
+  .home{
+    font-size: 3rem;
+    color: white;
+    justify-content: left;
+    margin-right: 40%;
+    margin-left: 20px;
+    padding-bottom: 30%;
+    padding-left: 10%;
+    padding-top: 24%;
+    border-bottom: px solid aqua;
+    
+  }
+  span{
+    color: #05c9df;
+    margin-left: 3%;
+  }
