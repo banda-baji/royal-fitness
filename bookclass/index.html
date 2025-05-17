@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book a Free Class - Royal Fitness</title>
+
+  <style>
+    /* Reset box-sizing */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8edea, #fed6e3); /* Background gradient */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+
+    .form-container {
+      background: white;
+      max-width: 500px;
+      width: 100%;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #2c3e50;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #1e8449;
+    }
+
+    #bookingResponse {
+      margin-top: 1rem;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    /* Responsive styles for small screens */
+    @media (max-width: 480px) {
+      .form-container {
+        padding: 1rem;
+      }
+
+      input,
+      select,
+      .btn {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Booking Form Container -->
+  <div class="form-container">
+    <h2>Book a Free Class</h2>
+
+    <!-- Form Start -->
+    <form id="freeClassForm">
+      <!-- Full Name -->
+      <div class="form-group">
+        <label for="fullName">Full Name *</label>
+        <input type="text" id="fullName" name="fullName" required />
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+
+      <!-- Phone -->
+      <div class="form-group">
+        <label for="phone">Phone Number *</label>
+        <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" />
+      </div>
+
+      <!-- Preferred Date -->
+      <div class="form-group">
+        <label for="classDate">Preferred Date *</label>
+        <input type="date" id="classDate" name="classDate" required />
+      </div>
+
+      <!-- Preferred Time -->
+      <div class="form-group">
+        <label for="classTime">Preferred Time *</label>
+        <select id="classTime" name="classTime" required>
+          <option value="">-- Select Time --</option>
+          <option value="6am-7am">6 AM - 7 AM</option>
+          <option value="7am-8am">7 AM - 8 AM</option>
+          <option value="6pm-7pm">6 PM - 7 PM</option>
+          <option value="7pm-8pm">7 PM - 8 PM</option>
+        </select>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn">Book Now</button>
+    </form>
+
+    <!-- Booking response message -->
+    <p id="bookingResponse"></p>
+
+    <!-- Back to Home Button (hidden initially) -->
+    <a href="index.html" id="backHomeBtn" class="btn"
+       style="display: none; background: #2c3e50; margin-top: 10px; width: 50%;
+              margin-left: 25%; text-decoration: none; justify-content: center; align-items: center; text-align: center;">
+      ⬅️ Back to Home
+    </a>
+  </div>
+
+  <!-- Script for form submission -->
+  <script>
+    const bookingForm = document.getElementById('freeClassForm');
+    const responseMsg = document.getElementById('bookingResponse');
+    const backHomeBtn = document.getElementById('backHomeBtn');
+
+    bookingForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Gather form data
+      const formData = {
+        fullName: bookingForm.fullName.value.trim(),
+        email: bookingForm.email.value.trim(),
+        phone: bookingForm.phone.value.trim(),
+        classDate: bookingForm.classDate.value,
+        classTime: bookingForm.classTime.value,
+      };
+
+      try {
+        // Send data to SheetDB API
+        const response = await fetch('https://sheetdb.io/api/v1/bb93hycrdt6j8', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        });
+
+        if (response.ok) {
+          // Redirect to thank you page on success
+          window.location.href = "thank-you.html";
+        } else {
+          alert('❌ There was a problem submitting your form.');
+        }
+
+        // Reset form and show home button
+        responseMsg.style.color = 'green';
+        bookingForm.reset();
+        backHomeBtn.style.display = 'block';
+
+      } catch (error) {
+        // Handle connection error
+        responseMsg.textContent = '❌ Failed to submit. Please check your connection.';
+        responseMsg.style.color = 'red';
+      }
+    });
+  </script>
+
+</body>
+</html>
